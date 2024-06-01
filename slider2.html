@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Slider</title>
+    <style>
+        body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    background-color: #f0f0f0;
+}
+
+.slider {
+    position: relative;
+    width: 80%;
+    max-width: 600px;
+    overflow: hidden;
+    border: 1px solid #ddd;
+}
+
+.slider-container {
+    display: flex;
+    transition: transform 0.5s ease;
+}
+
+.slider-container img {
+    width: 100%;
+    flex-shrink: 0;
+}
+
+button {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    z-index: 10;
+}
+
+button.prev {
+    left: 10px;
+}
+
+button.next {
+    right: 10px;
+}
+
+    </style>
+</head>
+<body>
+    <div class="slider">
+        <div class="slider-container">
+            <img src="dog.jpg" alt="Image 1">
+            <img src="dog.jpg" alt="Image 2">
+            <img src="dog.jpg" alt="Image 3">
+            <!-- Add more images as needed -->
+        </div>
+        <button class="prev" onclick="changeSlide(-1)">&#10094;</button>
+        <button class="next" onclick="changeSlide(1)">&#10095;</button>
+    </div>
+    <script>
+        let currentIndex = 0;
+
+function changeSlide(direction) {
+    const container = document.querySelector('.slider-container');
+    const slides = document.querySelectorAll('.slider-container img');
+    const totalSlides = slides.length;
+
+    currentIndex += direction;
+
+    if (currentIndex >= totalSlides) {
+        currentIndex = 0;
+    } else if (currentIndex < 0) {
+        currentIndex = totalSlides - 1;
+    }
+
+    const offset = -currentIndex * 100;
+    container.style.transform = `translateX(${offset}%)`;
+}
+
+    </script>
+</body>
+</html>
